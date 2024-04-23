@@ -1,4 +1,5 @@
 import time
+from spade.message import Message
 from spade.agent import Agent
 from spade.behaviour import OneShotBehaviour
 
@@ -15,8 +16,6 @@ class PatientAgent(Agent):
     class RequestSpecialtyBehaviour(OneShotBehaviour):
         async def run(self):
             print(f"Patient Agent {self.agent.jid} is requesting {self.agent.specialty} service")
-            msg = await self.send(
-                to=self.agent.service_contact,
-                body=f"I need {self.agent.specialty} service"
-            )
+            msg = await self.send(Message(to=self.agent.service_contact, body=f"I need {self.agent.specialty} service"))
+
             print(f"Patient Agent {self.agent.jid} sent request: {msg}")

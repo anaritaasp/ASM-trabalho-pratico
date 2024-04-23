@@ -5,7 +5,7 @@ from spade.message import Message
 
 class HospitalManagerAgent(Agent):
     async def setup(self):
-        print(f"Hospital Manager Agent {self.jid} is starting")
+        print(f"O agente de gestão hospitalar {self.jid} está a começar")
 
         alert_behaviour = self.AlertBehaviour()
         self.add_behaviour(alert_behaviour)
