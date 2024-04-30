@@ -2,9 +2,6 @@ import time
 from spade import quit_spade
 from Agents.gestorHospital import gestorHospitalAgent
 from Agents.rececionista import RececionistaAgent
-from Agents.gestorUnidade import gestorUnidadeAgent
-from Agents.medico import medicoAgent
-from Agents.paciente import pacienteAgent
 from dados import XMPP_SERVER, PASSWORD
 
 def main():
