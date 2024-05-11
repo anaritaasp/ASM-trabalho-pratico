@@ -49,10 +49,10 @@ def main():
             res_medico_agent= medico_agent.start(auto_register=True)
             res_medico_agent.result()
     
-    print(doctors_avaliable)
-    
+    current_number_of_patients = 0
+   
     # Criamos a agente rececionista    
-    rececionista = RececionistaAgent("rececionista@" + XMPP_SERVER, PASSWORD)
+    rececionista = RececionistaAgent("rececionista@" + XMPP_SERVER, PASSWORD, specialties_and_max, doctors_avaliable,current_number_of_patients)
     res_rececionista =rececionista.start(auto_register=True)
     res_rececionista.result()
     
