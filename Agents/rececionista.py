@@ -1,16 +1,24 @@
 from spade.agent import Agent
-from spade.behaviour import OneShotBehaviour
-from spade.message import Message
-from Behaviours.receiveInfo import ReceiveMaxPatientsBehavior
-from Behaviours.receiveDoctorList import ReceiveDoctorListBehavior
-from Behaviours.handlePatient import HandlePatientRequests
+#from Behaviours.registerPatient import receivePatient
 
 class RececionistaAgent(Agent):
+    def __init__(self, *args, specialties_info=None, doctors_available=None,**kwargs):
+        super().__init__(*args, **kwargs)
+        self.specialties_info = specialties_info
+        self.doctors_available = doctors_available
+    
     async def setup(self):
-        print("Agent Rececionista {} starting...".format(str(self.jid)))
+        print("A agente Rececionista {} foi inicializada ..".format(str(self.jid)))
+        print ("#### O Hospital UMINHO encontra-se aberto ####")
         
-        # Add behavior to receive max patients and specialties
-        self.add_behaviour(ReceiveMaxPatientsBehavior())
-        self.add_behaviour(ReceiveDoctorListBehavior())
-        self.add_behaviour(HandlePatientRequests())
+            
+
+    
+    
+    
+        
+    
+    
+    
+
 
