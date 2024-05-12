@@ -1,12 +1,14 @@
 from spade.agent import Agent
+from termcolor import colored
 
 class medicoAgent(Agent): 
-    
-    def __init__(self, jid, name, specialty):
-        super().__init__(jid, name)
-        self.specialty = specialty
+
+    def __init__(self, jid, password, a_name, specialty):
+         super().__init__(jid, password)
+         self.a_name = a_name
+         self.specialty = specialty
         
         
     async def setup(self):
-        print ("O agente medico  {}".format(str(self.jid))+ " foi inicializado ...")
+        print (colored("O agente medico  {}".format(str(self.jid))+ " foi inicializado ...","blue"))
         
