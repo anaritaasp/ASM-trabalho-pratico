@@ -12,13 +12,13 @@ class Hospital:
     def run_hospital(self):
         
         
-        print(colored("#### HOSPITAL UMINHO ####",'green'))
+        print(colored("#### HOSPITAL UMINHO ####",'yellow'))
         
         # Indicamos as especialidades existentes e o número máximo de pacientes
         specialties_and_max = {
-                "Cardiologia":(5,0),
-                "Neurologia":(5,0),
-                "Pediatria":(5,0)
+                "cardiologia":(5,0),
+                "neurologia":(5,0),
+                "pediatria":(5,0)
             }
         
         speciality_list = list(specialties_and_max.keys())
@@ -34,9 +34,9 @@ class Hospital:
             gestores_agents_list.append(gestor_agent)
         
         doctors_avaliable= {
-            "Cardiologia":[],
-            "Neurologia":[],
-            "Pediatria":[]
+            "cardiologia":[],
+            "neurologia":[],
+            "pediatria":[]
         }
         
         medicos_agents_list = []
@@ -89,9 +89,9 @@ class Hospital:
                     pacientes.stop()
                 # stop o gestor do hospital
                 break
-        print(colored("Os agentes foram terminados",'green'))
-        print(colored("#### O Hospital encontra-se fechado ####",'green'))
-        print(colored("####   ####",'green'))
+        print(colored("Os agentes foram terminados",'yellow'))
+        print(colored("#### O Hospital encontra-se fechado ####",'yellow'))
+        print(colored("####   ####",'pink'))
 
         # finish all the agents and behaviors running in your process
         quit_spade()

@@ -1,7 +1,9 @@
+import asyncio
 from spade.agent import Agent
 from termcolor import colored
 from Behaviours.RequireDoctor import RequireDoctor
 from Behaviours.ReceiveDoctorName import ReceiveDoctorName
+from Behaviours.RequireTreatment import RequireTreatment
 
 class pacienteAgent(Agent): 
     
@@ -19,6 +21,12 @@ class pacienteAgent(Agent):
             self.add_behaviour(ask_for_doctor)
             receive_Doctor_name = ReceiveDoctorName()
             self.add_behaviour(receive_Doctor_name)
+            
     
     def set_medico_assigned(self, medico_name):
-        self.medico_assigned= medico_name
+        self.medico_assigned = medico_name
+        print(colored("Médico atribuído:", "green"), medico_name)
+        if self.medico_assigned is not None:
+            ask_for_treatment = RequireTreatment(self.a_name, self.medico_assigned)
+            self.add_behaviour(ask_for_treatment)
+            print(colored("Pedido de tratamento adicionado.", "green"))

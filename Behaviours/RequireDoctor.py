@@ -10,9 +10,8 @@ class RequireDoctor(OneShotBehaviour):
         self.triagem = triagem
         
     async def run(self):
-        print("Requisito de médico")
         msg = Message(to="gestHospital@" + XMPP_SERVER)  
         msg.body = f"Paciente: {self.patient_name}, Triagem: {self.triagem}"
         msg.set_metadata("performative", "request")
         await self.send(msg)
-        print(colored(f"Sent request from {self.patient_name} for a doctor with triage {self.triagem} to gestHospital.", "green"))
+        print(colored(f"O paciente {self.patient_name} requer um médico da especialidade {self.triagem} ao gestor do hospital.", "green"))

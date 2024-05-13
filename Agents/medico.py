@@ -1,5 +1,6 @@
 from spade.agent import Agent
 from termcolor import colored
+from Behaviours.ProvideTreatment import ProvideTreatment
 
 class medicoAgent(Agent): 
 
@@ -11,4 +12,6 @@ class medicoAgent(Agent):
         
     async def setup(self):
         print (colored("O agente medico  {}".format(str(self.jid))+ " foi inicializado ...","blue"))
+        tratamento_resposta = ProvideTreatment(self.a_name)
+        self.add_behaviour(tratamento_resposta)
         
