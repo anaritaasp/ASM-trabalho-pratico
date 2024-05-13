@@ -52,12 +52,10 @@ class Hospital:
                 res_medico_agent.result()
                 medicos_agents_list.append(medico_agent)
         
-        print(doctors_avaliable) 
-        # Criamos o agente gestor do Hospital    
+        # Criamos o agente gestor do Hospital - com toda a informação necessária   
         gestorHospital = gestorHospitalAgent("gestHospital@" + XMPP_SERVER, PASSWORD, specialties_and_max, doctors_avaliable)
         res_gestorHospital =gestorHospital.start(auto_register=True)
         res_gestorHospital.result()
-        
         
         # Esperamos que estes os agentes anteriores terminem
         time.sleep(10)
@@ -89,10 +87,11 @@ class Hospital:
                 # stop de todos os agentes pacientes
                 for pacientes in pacientes_agents_list:
                     pacientes.stop()
-
                 # stop o gestor do hospital
                 break
-        print('Agents finished')
+        print(colored("Os agentes foram terminados",'green'))
+        print(colored("#### O Hospital encontra-se fechado ####",'green'))
+        print(colored("####   ####",'green'))
 
         # finish all the agents and behaviors running in your process
         quit_spade()
