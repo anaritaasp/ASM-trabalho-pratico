@@ -62,15 +62,15 @@ class Hospital:
         
         # Criamos os agentes pacientes
         pacientes_agents_list=[]
-        for i in range(1):
-            time.sleep(1)
+        for i in range(15):
+            #time.sleep(1)
             paciente_name = generate_patient_number()
             paciente_jid = f"{paciente_name}@"+XMPP_SERVER
             pacient_triagem = triagem(speciality_list)
             paciente_agent = pacienteAgent(paciente_jid, PASSWORD, paciente_name, pacient_triagem)
             paciente_agent.set("status","não_atendido")
             res_paciente_agent= paciente_agent.start(auto_register=True)
-            res_paciente_agent.result()
+            #res_paciente_agent.result()
             pacientes_agents_list.append(paciente_agent)
             
         # Handle interruption of all agents
@@ -91,7 +91,7 @@ class Hospital:
                 break
         print(colored("Os agentes foram terminados",'yellow'))
         print(colored("#### O Hospital encontra-se fechado ####",'yellow'))
-        print(colored("####   ####",'pink'))
+        print(colored("####   ####",'yellow'))
 
         # finish all the agents and behaviors running in your process
         quit_spade()

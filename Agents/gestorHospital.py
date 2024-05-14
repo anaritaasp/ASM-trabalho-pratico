@@ -1,6 +1,7 @@
 from spade.agent import Agent
 from aux import triagem
 from Behaviours.ReceiveDoctorRequest import ReceiveDoctorRequest
+from Behaviours.ProvideAlta import ProvideAlta
 from termcolor import colored
 import random
 
@@ -12,9 +13,11 @@ class gestorHospitalAgent(Agent):
 
     async def setup(self):
         print(colored("O agente gestor do Hospital {} foi inicializada ..".format(str(self.jid)),"blue"))
-        print (colored("#### O Hospital UMINHO encontra-se aberto ####","blue"))
+        print (colored("#### O Hospital UMINHO encontra-se aberto ####","yellow"))
         entradaPacientes = ReceiveDoctorRequest(self)
         self.add_behaviour(entradaPacientes)
+        saidaPacientes = ProvideAlta(self)
+        self.add_behaviour(saidaPacientes)
         
     def escolher_medico(self,specialty):
         if specialty in self.doctors_available:
@@ -39,6 +42,12 @@ class gestorHospitalAgent(Agent):
                 return False # a especialidade está cheia
         else:
             return False # a especialidade não foi encontrada (just in case)
+    
+    def remover_paciente(self, especialidade):
+        if especialidade in self.specialties_and_max:
+            maximo = self.specialties_and_max[especialidade][0]
+            novo_valor = self.specialties_and_max[especialidade][1] - 1
+            self.specialties_and_max[especialidade] = (maximo, novo_valor)
 
 
 

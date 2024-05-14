@@ -8,10 +8,14 @@ class ProvideTreatment(CyclicBehaviour):
         self.doctor_name = doctor_name
 
     async def run(self):
-        msg = await self.receive(timeout=15) 
-        #print("Message Received:", msg.body)
-        if msg and msg.body.strip() == "Preciso de tratamento":
-            print(colored(f"O médico {self.doctor_name} recebeu um pedido de tratamento do paciente {msg.sender}", "blue"))
-            reply_msg = Message(to=msg.sender)
-            reply_msg.body = "Tratamento providenciado"
-            await self.send(reply_msg)
+        msg = await self.receive(timeout=15)
+        if msg:
+            per = msg.get_metadata('performative')
+            if per == 'tratamento': 
+                if msg.body.strip() == "Preciso de tratamento":
+                    print(colored(f"O médico {self.doctor_name} recebeu um pedido de tratamento do paciente {msg.sender}", "green"))
+                    rep=msg.make_reply()
+                    rep.set_metadata('performative','daalta')
+                    rep.body = "Tratamento providenciado"
+                    await self.send(rep)
+            
