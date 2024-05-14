@@ -24,6 +24,7 @@ class Hospital:
         speciality_list = list(specialties_and_max.keys())
 
         gestores_agents_list = []
+        """
         # Criamos os agentes gestores de cada unidade hospitalar
         for specialty in speciality_list:
             gestor_name = f"Gestor de {specialty}"
@@ -31,7 +32,7 @@ class Hospital:
             gestor_agent = gestorUnidadeAgent(gestor_jid, PASSWORD,specialty)
             res_gestor_agent = gestor_agent.start(auto_register=True)
             res_gestor_agent.result() 
-            gestores_agents_list.append(gestor_agent)
+            gestores_agents_list.append(gestor_agent) """
         
         doctors_avaliable= {
             "cardiologia":[],
@@ -79,8 +80,8 @@ class Hospital:
              time.sleep(1)
             except KeyboardInterrupt:
                 # stop de todos os agentes gestores
-                for gestores in gestores_agents_list:
-                    gestores.stop()
+                """for gestores in gestores_agents_list:
+                    gestores.stop()"""
                 # stop de todos os agentes médicos 
                 for medicos in medicos_agents_list:
                     medicos.stop()

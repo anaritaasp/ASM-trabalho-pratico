@@ -3,7 +3,7 @@ from spade.message import Message
 from termcolor import colored
 from dados import XMPP_SERVER
 
-class ReceiveDoctorName(CyclicBehaviour):
+class ReceiveFromGestor(CyclicBehaviour):
     def __init__(self, patient_name, triagem):
         super().__init__()
         self.patient_name = patient_name

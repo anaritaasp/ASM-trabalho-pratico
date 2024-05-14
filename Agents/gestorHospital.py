@@ -1,6 +1,6 @@
 from spade.agent import Agent
 from aux import triagem
-from Behaviours.ReceiveDoctorRequest import ReceiveDoctorRequest
+from Behaviours.ReceiveFromPatient import ReceiveFromPatient
 from Behaviours.ProvideAlta import ProvideAlta
 from termcolor import colored
 import random
@@ -14,7 +14,7 @@ class gestorHospitalAgent(Agent):
     async def setup(self):
         print(colored("O agente gestor do Hospital {} foi inicializada ..".format(str(self.jid)),"blue"))
         print (colored("#### O Hospital UMINHO encontra-se aberto ####","yellow"))
-        entradaPacientes = ReceiveDoctorRequest(self)
+        entradaPacientes = ReceiveFromPatient(self)
         self.add_behaviour(entradaPacientes)
         saidaPacientes = ProvideAlta(self)
         self.add_behaviour(saidaPacientes)

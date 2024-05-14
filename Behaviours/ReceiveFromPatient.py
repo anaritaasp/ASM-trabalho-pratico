@@ -2,7 +2,7 @@ from spade.behaviour import CyclicBehaviour
 from spade.message import Message
 from termcolor import colored
 
-class ReceiveDoctorRequest(CyclicBehaviour):
+class ReceiveFromPatient(CyclicBehaviour):
     def __init__(self, agent):
         super().__init__()
         self.agent = agent

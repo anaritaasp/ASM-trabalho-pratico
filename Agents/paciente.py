@@ -2,7 +2,7 @@ import asyncio
 from spade.agent import Agent
 from termcolor import colored
 from Behaviours.RequireDoctor import RequireDoctor
-from Behaviours.ReceiveDoctorName import ReceiveDoctorName
+from Behaviours.ReceiveFromGestor import ReceiveFromGestor
 from Behaviours.RequireTreatment import RequireTreatment
 class pacienteAgent(Agent): 
     
@@ -20,7 +20,7 @@ class pacienteAgent(Agent):
         if self.get("status") == "não_atendido":
             ask_for_doctor=RequireDoctor(self.a_name,self.triagem)
             self.add_behaviour(ask_for_doctor)
-            get_doctor = ReceiveDoctorName(self.a_name,self.triagem)
+            get_doctor = ReceiveFromGestor(self.a_name,self.triagem)
             self.add_behaviour(get_doctor)
     
     
