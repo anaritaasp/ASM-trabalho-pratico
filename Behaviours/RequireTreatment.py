@@ -13,10 +13,7 @@ class RequireTreatment(OneShotBehaviour):
     async def run(self):
         print(colored(f"O paciente {self.patient_name} requisita tratamento do médico {self.doctor_name}", "green"))
         medico_nome = self.doctor_name.rstrip('.')
-        #print(f"medico_nome: '{medico_nome}'")
-        #print(f"XMPP_SERVER: '{XMPP_SERVER}'")
         medico_jid = medico_nome + "@" + XMPP_SERVER
-        #print(f"medico_jid: '{medico_jid}'")
         msg = Message(to=medico_jid)
         msg.body = "Preciso de tratamento"
         rep=msg.make_reply()

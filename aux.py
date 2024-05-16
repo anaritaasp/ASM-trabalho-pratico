@@ -15,4 +15,7 @@ def generate_patient_number():
 def triagem(specialities_available):
     return random.choice(specialities_available)
 
+def select_hospital(hospitais):
+    return random.choice(hospitais)
+
 

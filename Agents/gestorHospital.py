@@ -6,14 +6,16 @@ from termcolor import colored
 import random
 
 class gestorHospitalAgent(Agent):
-    def __init__(self, jid, password, specialties_and_max, doctors_available):
+    def __init__(self, jid, password, specialties_and_max, doctors_available,hospitalParceiro, hospital_name):
         super().__init__(jid, password)
         self.specialties_and_max = specialties_and_max
         self.doctors_available = doctors_available
+        self.hospitalParceiro = hospitalParceiro
+        self.hospital_name= hospital_name
 
     async def setup(self):
-        print(colored("O agente gestor do Hospital {} foi inicializada ..".format(str(self.jid)),"blue"))
-        print (colored("#### O Hospital UMINHO encontra-se aberto ####","yellow"))
+        print(colored("O agente gestor do Hospital {} foi inicializado ..".format(str(self.jid)),"blue"))
+        print (colored(f"#### O Hospital {self.hospital_name} encontra-se aberto ####","yellow"))
         entradaPacientes = ReceiveFromPatient(self)
         self.add_behaviour(entradaPacientes)
         saidaPacientes = ProvideAlta(self)
@@ -28,7 +30,6 @@ class gestorHospitalAgent(Agent):
                     print(f"Não há medicos disponíveis para essa especialidade {specialty}.")
                     return None
         else:
-                print(f"A especialidade providenciada {specialty} não foi encontrada.")
                 return None
             
     def adicionar_paciente(self, especialidade):
@@ -41,7 +42,7 @@ class gestorHospitalAgent(Agent):
             else:
                 return False # a especialidade está cheia
         else:
-            return False # a especialidade não foi encontrada (just in case)
+             return f"O paciente deve ser reencaminhado para o hospital: {self.hospitalParceiro}" # a especialidade não foi encontrada (just in case)
     
     def remover_paciente(self, especialidade):
         if especialidade in self.specialties_and_max:

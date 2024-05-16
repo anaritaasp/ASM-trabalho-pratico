@@ -4,10 +4,11 @@ from termcolor import colored
 from dados import XMPP_SERVER
 
 class ReceiveFromGestor(CyclicBehaviour):
-    def __init__(self, patient_name, triagem):
+    def __init__(self, patient_name, triagem, hospital_name):
         super().__init__()
         self.patient_name = patient_name
         self.triagem = triagem
+        self.hospital_name= hospital_name
         
     async def run(self):
         msg = await self.receive(timeout=15)  
@@ -19,12 +20,21 @@ class ReceiveFromGestor(CyclicBehaviour):
                 if len(content) == 2 and content[0] == "O médico é":
                     medico_assigned = content[1]
                     self.agent.set_medico_assigned(medico_assigned)
-                    print(colored(f"O paciente foi atribuido ao médico: {medico_assigned}", "green"))
+                    print(colored(f"O paciente {self.patient_name} foi atribuido ao médico: {medico_assigned}", "green"))
+            elif per == "encaminhamento":
+                novo_hospital_text = msg.body  # Supondo que o corpo da mensagem contenha o nome do novo hospital
+                colon_index = novo_hospital_text.find(":")
+                novo_hospital = novo_hospital_text[colon_index + 1:].strip()
+                print(colored(f"O paciente {self.patient_name} foi encaminhado para o hospital {novo_hospital}.", "green"))
+                self.agent.changeHospital(novo_hospital)
+                
+
             elif per == 'daalta':
                 if  msg.body.strip() == "Tratamento providenciado":
                     self.alta = "alta"
                     print(colored(f"O paciente recebeu a confirmação de que o tratamento foi providenciado pelo médico {msg.sender}", "green"))
-                    rep = Message(to="gestHospital@" + XMPP_SERVER)  
+                    gestor_jid =self.hospital_name + XMPP_SERVER
+                    rep = Message(to=gestor_jid)  
                     rep.body = f"Paciente: {self.patient_name}, Triagem: {self.triagem}"
                     rep.set_metadata("performative", "sair")
                     await self.send(rep)
@@ -33,5 +43,5 @@ class ReceiveFromGestor(CyclicBehaviour):
                 print(colored(f"O paciente {self.patient_name} saiu do hospital", "green"))
                 await self.agent.stop()
         else:
-            print(colored("1-Unexpected message format.", "red"))
+            None 
         
