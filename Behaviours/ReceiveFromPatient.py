@@ -28,13 +28,11 @@ class ReceiveFromPatient(CyclicBehaviour):
                 resultado = self.agent.adicionar_paciente(triagem)
                 if resultado == True: # Check availability
                     rep = msg.make_reply()
-                    print(triagem)
                     medicos_assigneds = self.agent.escolher_medico(triagem)
                     doct1 = str(medicos_assigneds[0])  # Accessing the first element of the first tuple
                     doct2 = str(medicos_assigneds[1])  # Accessing the first element of the second tuple
                     rep.set_metadata('performative', 'inform')
                     rep.body = str(medicos_assigneds)
-                    print("this:",rep.body)
                     await self.send(rep)
                     print(colored(f"O paciente {patient_name} deu entrada na especialidade {triagem} e pode escolher o médico {doct1} ou {doct2}.", "green"))
                 elif isinstance(resultado, str) and resultado.startswith("O paciente deve ser reencaminhado para o hospital:"):
