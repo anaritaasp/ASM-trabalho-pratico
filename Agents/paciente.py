@@ -17,7 +17,7 @@ class pacienteAgent(Agent):
         self.changed = False
         
     async def setup(self):
-        print(colored(f"O paciente {str(self.jid)} foi inicializado ...", "blue"))
+        print(colored(f"O agente paciente {str(self.jid)} foi inicializado ...", "blue"))
         if self.get("status") == "não_atendido":
                 print(colored(f"O paciente {str(self.jid)} deu entrada no hospital {self.hospital} ...", "blue"))
                 ask_for_doctor = RequireDoctor(self.hospital, self.a_name, self.triagem)

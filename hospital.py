@@ -3,7 +3,7 @@ from spade import quit_spade
 from Agents.gestorHospital import gestorHospitalAgent
 from Agents.medico import medicoAgent
 from Agents.paciente import pacienteAgent
-from aux import generate_random_doctor_name,add_doctor,generate_patient_number,triagem,select_hospital
+from aux import generate_random_doctor_name,add_doctor,generate_patient_number,triagem,select_hospital,generate_level,generate_rating
 from dados import XMPP_SERVER, PASSWORD
 from termcolor import colored
 
@@ -35,10 +35,11 @@ class Hospital:
         medicos_agents_list = []
         # Criamos 5 agentes médicos para cada especialidade:
         for speciality in speciality_list_minho:
-            for _ in range(1):
+            for _ in range(5):
                 random_doctor_name = generate_random_doctor_name()
                 doctor_name =(speciality + random_doctor_name)
-                add_doctor(speciality,doctor_name,doctors_avaliable_minho) 
+                doctor_name_and_scores = (doctor_name, generate_rating(),generate_level())
+                add_doctor(speciality,doctor_name_and_scores,doctors_avaliable_minho) 
                 medico_jid = f"{doctor_name}@"+XMPP_SERVER
                 medico_agent = medicoAgent(medico_jid, PASSWORD, doctor_name, speciality)
                 res_medico_agent= medico_agent.start(auto_register=True)
@@ -74,10 +75,11 @@ class Hospital:
         medicos_agents_list = []
         # Criamos 5 agentes médicos para cada especialidade:
         for speciality in speciality_list_porto:
-            for _ in range(1):
+            for _ in range(5):
                 random_doctor_name = generate_random_doctor_name()
                 doctor_name =(speciality + random_doctor_name)
-                add_doctor(speciality,doctor_name,doctors_avaliable_porto) 
+                doctor_name_and_scores = (doctor_name, generate_rating(),generate_level())
+                add_doctor(speciality,doctor_name_and_scores,doctors_avaliable_porto) 
                 medico_jid = f"{doctor_name}@"+XMPP_SERVER
                 medico_agent = medicoAgent(medico_jid, PASSWORD, doctor_name, speciality)
                 res_medico_agent= medico_agent.start(auto_register=True)

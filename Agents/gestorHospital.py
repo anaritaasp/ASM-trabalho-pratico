@@ -23,15 +23,12 @@ class gestorHospitalAgent(Agent):
         
     def escolher_medico(self,specialty):
         if specialty in self.doctors_available:
-                doctors_list = self.doctors_available[specialty]
-                if doctors_list:
-                    return random.choice(doctors_list)
-                else:
-                    print(f"Não há medicos disponíveis para essa especialidade {specialty}.")
-                    return None
-        else:
-                return None
-            
+            doctors_list = self.doctors_available[specialty]
+            if len(doctors_list) >= 2:
+                chosen_doctors = random.sample(doctors_list, k=2)
+                return chosen_doctors
+            else: return None
+
     def adicionar_paciente(self, especialidade):
         if especialidade in self.specialties_and_max:
             maximo = self.specialties_and_max[especialidade][0]
